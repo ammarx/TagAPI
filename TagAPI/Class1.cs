@@ -53,40 +53,42 @@ namespace TagAPIx
         public static void extractfile()
         {
             string mcLocation = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/.minecraft/";
-          //  try
-           // {
+            try
+            {
                 foreach (string entry in versionData["natives"])
                 {
                     otherDotNetZip.Extract(mcLocation + @"\libraries\" + entry, mcLocation + @"\versions\" + versionData["id"][0] + @"\" + versionData["id"][0] + "_TagCraftMC", "META-INF");
                 }
-           // }
-          //  catch (Exception ex)
-           // {
-             
-           // }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("An error occurred: '{0}'", e);
+            }
             //return status;
         }
 
          public static void main()
         {
-            //Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData
-            string text = System.IO.File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/.minecraft/TagCraftMC Files/Settings/versionselect.txt");
-            string username = System.IO.File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/.minecraft/TagCraftMC Files/Settings/taguser.txt");
+            try
+            {
+                //Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData
+                string text = System.IO.File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/.minecraft/TagCraftMC Files/Settings/versionselect.txt");
+                string username = System.IO.File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/.minecraft/TagCraftMC Files/Settings/taguser.txt");
 
-            // Display the file contents to the console. Variable text is a string.
-            //System.Console.WriteLine("Contents of WriteText.txt = {0}", text);
-            
+                // Display the file contents to the console. Variable text is a string.
+                //System.Console.WriteLine("Contents of WriteText.txt = {0}", text);
 
-            //screw this 1.7.4 make it to text ah ah ah. 
-               // string mcLocation = "C:" + @"\" + "Users" + @"\" + "User" + @"\" + "AppData" + @"\" + "Roaming" + @"\" + ".minecraft" + @"\";
-               string mcLocation = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/.minecraft/";
+
+                //screw this 1.7.4 make it to text ah ah ah. 
+                // string mcLocation = "C:" + @"\" + "Users" + @"\" + "User" + @"\" + "AppData" + @"\" + "Roaming" + @"\" + ".minecraft" + @"\";
+                string mcLocation = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/.minecraft/";
 
                 string fileName = mcLocation + @"\versions\" + text + @"\" + text + ".json";
 
 
                 if (File.Exists(fileName))
                 {
-                   versionData = otherJsonNet.getVersionData(fileName);
+                    versionData = otherJsonNet.getVersionData(fileName);
                 }
                 else
                 {
@@ -103,7 +105,7 @@ namespace TagAPIx
                 string mcClass = versionData["mainClass"][0];
                 string mcArgs = versionData["minecraftArguments"][0];
                 mcArgs = mcArgs.Replace("${auth_player_name}", username);
-                
+
                 mcArgs = mcArgs.Replace("${auth_session}", "OFFLINE_MODE");
                 mcArgs = mcArgs.Replace("${auth_uuid}", "OFFLINE_MODE");
                 mcArgs = mcArgs.Replace("${auth_access_token}", "OFFLINE_MODE");
@@ -118,15 +120,19 @@ namespace TagAPIx
                 //Removed the min memory option... dont like it. 
                 buildArguments = mojangIntelTrick + " -Xmx" + mcMaxRam + " " + mcNatives + " " + mcLibraries + mcJar + " " + mcClass + " " + mcArgs;
 
-                string[] lines = {buildArguments};
+                string[] lines = { buildArguments };
                 // WriteAllLines creates a file, writes a collection of strings to the file, 
                 // and then closes the file.
                 //  oReadp = IO.File.OpenText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/.minecraft/TagCraftMC Files/Settings/versions/" + ver + ".txt")
 
                 System.IO.File.WriteAllLines((Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/.minecraft/TagCraftMC Files/Settings/versions/" + text + ".txt"), lines);
-              
-           // textBox1.Text = buildArguments;
 
+                // textBox1.Text = buildArguments;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("An error occurred: '{0}'", e);
+            }
            }
         }
     }
