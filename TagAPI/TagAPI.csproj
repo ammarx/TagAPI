@@ -7,7 +7,7 @@
     <ProjectGuid>{D251F27E-819E-4632-9ED4-2B594762D421}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TagAPI</RootNamespace>
+    <RootNamespace>TagAPIx</RootNamespace>
     <AssemblyName>TagAPI</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -32,7 +32,7 @@
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\jsontestproject\jsontestproject\bin\Debug\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\..\Visual Studio 2013\Projects\TagAPI\TagAPI\bin\Debug\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

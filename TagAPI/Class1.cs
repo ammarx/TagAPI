@@ -8,7 +8,7 @@ using System.Net;
 using System.Xml.Linq;
 using System.IO;
 
-namespace TagAPI
+namespace TagAPIx
 {
     public class Class1
     {
@@ -18,8 +18,6 @@ namespace TagAPI
         //(this application)application reads versionselect.txt (-) and reads json and makes arguments and then create a new txt file and run the argument.
         //go back to main app.
 
-          class atomMinecraft
-    {
         internal static Dictionary<string, string[]> versionData = new Dictionary<string, string[]>
         {
             //{"id"                  , new string[] { "1.6.4" }},
@@ -46,15 +44,14 @@ namespace TagAPI
 
         
 
-        }
-
+    
         static string buildArguments = "";
         static string mcSave =  Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/.minecraft/";
         //static string mcStartRam = "";
         static string mcMaxRam = System.IO.File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/.minecraft/TagCraftMC Files/Settings/memory.txt");
 
 
-        static void Main()
+         public static void main()
         {
             //Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData
             string text = System.IO.File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/.minecraft/TagCraftMC Files/Settings/versionselect.txt");
@@ -73,7 +70,7 @@ namespace TagAPI
 
                 if (File.Exists(fileName))
                 {
-                   atomMinecraft.versionData = otherJsonNet.getVersionData(fileName);
+                   versionData = otherJsonNet.getVersionData(fileName);
                 }
                 else
                 {
@@ -82,20 +79,20 @@ namespace TagAPI
                 string mojangIntelTrick = "-XX:HeapDumpPath=MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump";
                 string mcNatives = "-Djava.library.path=\"" + mcLocation + @"\versions\" + text + @"\" + text + "_TagCraftMC\"";
                 string mcLibraries = "-cp ";
-                foreach (string entry in atomMinecraft.versionData["libraries"])
+                foreach (string entry in versionData["libraries"])
                 {
                     mcLibraries = mcLibraries + "\"" + mcLocation + @"\libraries\" + entry + "\";";
                 }
                 string mcJar = "\"" + mcLocation + @"\versions\" + text + @"\" + text + ".jar\"";
-                string mcClass = atomMinecraft.versionData["mainClass"][0];
-                string mcArgs = atomMinecraft.versionData["minecraftArguments"][0];
+                string mcClass = versionData["mainClass"][0];
+                string mcArgs = versionData["minecraftArguments"][0];
                 mcArgs = mcArgs.Replace("${auth_player_name}", username);
                 
                 mcArgs = mcArgs.Replace("${auth_session}", "OFFLINE_MODE");
                 mcArgs = mcArgs.Replace("${auth_uuid}", "OFFLINE_MODE");
                 mcArgs = mcArgs.Replace("${auth_access_token}", "OFFLINE_MODE");
 
-                mcArgs = mcArgs.Replace("${assets_index_name}", atomMinecraft.versionData["assets"][0]);
+                mcArgs = mcArgs.Replace("${assets_index_name}", versionData["assets"][0]);
                 mcArgs = mcArgs.Replace("${version_name}", text);
                 mcArgs = mcArgs.Replace("${user_properties}", "{}");
                 mcArgs = mcArgs.Replace("${game_directory}", "\"" + mcSave + "\"");
