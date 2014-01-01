@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using System.Net;
 using System.Xml.Linq;
 using System.IO;
+using Ionic.Zip;
 
 namespace TagAPIx
 {
@@ -49,7 +50,22 @@ namespace TagAPIx
         static string mcSave =  Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/.minecraft/";
         //static string mcStartRam = "";
         static string mcMaxRam = System.IO.File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/.minecraft/TagCraftMC Files/Settings/memory.txt");
-
+        public static void extractfile()
+        {
+            string mcLocation = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/.minecraft/";
+          //  try
+           // {
+                foreach (string entry in versionData["natives"])
+                {
+                    otherDotNetZip.Extract(mcLocation + @"\libraries\" + entry, mcLocation + @"\versions\" + versionData["id"][0] + @"\" + versionData["id"][0] + "_TagCraftMC", "META-INF");
+                }
+           // }
+          //  catch (Exception ex)
+           // {
+             
+           // }
+            //return status;
+        }
 
          public static void main()
         {

@@ -143,7 +143,7 @@ namespace TagAPIx
             var json = System.IO.File.ReadAllText(jsonFile);
             dynamic version = JsonConvert.DeserializeObject(json);
             Dictionary<string, string[]> dict = new Dictionary<string, string[]>{
-                {"AL_LatestID", new string[] { version.latest.release, version.latest.snapshot }},
+                {"TagCraftMC", new string[] { version.latest.release, version.latest.snapshot }},
               //{"1.6.4",       new string[] { "time", "releaseTime", "type" }}
             };
             foreach (var entry in version.versions)
