@@ -53,11 +53,15 @@ namespace TagAPIx
         public static void extractfile()
         {
             string mcLocation = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/.minecraft/";
+            string text = System.IO.File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/.minecraft/TagCraftMC Files/Settings/versionselect.txt");
+                
             try
             {
                 foreach (string entry in versionData["natives"])
                 {
-                    otherDotNetZip.Extract(mcLocation + @"\libraries\" + entry, mcLocation + @"\versions\" + versionData["id"][0] + @"\" + versionData["id"][0] + "_TagCraftMC", "META-INF");
+                //    otherDotNetZip.Extract(mcLocation + @"\libraries\" + entry, mcLocation + @"\versions\" + versionData["id"][0] + @"\" + versionData["id"][0] + "_TagCraftMC", "META-INF");
+                    otherDotNetZip.Extract(mcLocation + @"\libraries\" + entry, mcLocation + @"\versions\" + text + @"\" + text + "_TagCraftMC", "META-INF");
+                
                 }
             }
             catch (Exception e)
