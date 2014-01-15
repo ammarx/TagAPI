@@ -59,18 +59,18 @@ namespace TagAPIx
         static string buildArguments = "";
         static string mcSave =  Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/.minecraft/";
         //static string mcStartRam = "";
-        static string mcMaxRam = System.IO.File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/.minecraft/TagCraftMC Files/Settings/memory.txt");
+        //static string mcMaxRam = System.IO.File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/.minecraft/TagCraftMC Files/Settings/memory.txt");
         public static void extractfile()
         {
             string mcLocation = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/.minecraft/";
-            string text = System.IO.File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/.minecraft/TagCraftMC Files/Settings/versionselect.txt");
+         //   string text = System.IO.File.ReadAllText(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/.minecraft/TagCraftMC Files/Settings/versionselect.txt");
                 
             try
             {
                 foreach (string entry in versionData["natives"])
                 {
                 //    otherDotNetZip.Extract(mcLocation + @"\libraries\" + entry, mcLocation + @"\versions\" + versionData["id"][0] + @"\" + versionData["id"][0] + "_TagCraftMC", "META-INF");
-                    otherDotNetZip.Extract(mcLocation + @"\libraries\" + entry, mcLocation + @"\versions\" + text + @"\" + text + "_TagCraftMC", "META-INF");
+                    otherDotNetZip.Extract(mcLocation + @"\libraries\" + entry, mcLocation + @"\versions\" + versionnumber + @"\" + versionnumber + "_TagCraftMC", "META-INF");
                 
                 }
             }
@@ -114,6 +114,16 @@ namespace TagAPIx
                         if (a.Contains("versionnumber:"))
                         {
                             versionnumber = a.Replace("versionnumber:", "");
+
+                        }
+                        else
+                        {
+                            // do nothing!
+                        }
+
+                        if (a.Contains("memory:"))
+                        {
+                            memory = a.Replace("memory:", "");
 
                         }
                         else
@@ -195,7 +205,7 @@ namespace TagAPIx
                 mcArgs = mcArgs.Replace("${assets_root}", "\"" + mcLocation + "\\assets\"");
                 //buildArguments = mojangIntelTrick + " " + mcStartRam + " " + mcMaxRam + " " + mcNatives + " " + mcLibraries + mcJar + " " + mcClass + " " + mcArgs;
                 //Removed the min memory option... dont like it. 
-                buildArguments = mojangIntelTrick + " -Xmx" + mcMaxRam + " " + mcNatives + " " + mcLibraries + mcJar + " " + mcClass + " " + mcArgs;
+                buildArguments = mojangIntelTrick + " -Xmx" + memory + " " + mcNatives + " " + mcLibraries + mcJar + " " + mcClass + " " + mcArgs;
 
                 string[] lines = { buildArguments };
                 // WriteAllLines creates a file, writes a collection of strings to the file, 
