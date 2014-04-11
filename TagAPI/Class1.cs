@@ -124,7 +124,9 @@ namespace TagAPIx
                         if (a.Contains("memory:"))
                         {
                             memory = a.Replace("memory:", "");
-
+                            if (memory == "") {
+                                memory = "512M";
+                            }
                         }
                         else
                         {
